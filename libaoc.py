@@ -27,7 +27,7 @@ def get_data_file(year: int, day: int) -> pathlib.Path:
     return data_file
 
 
-class SolutionBase:
+class SolutionBase(abc.ABC):
     def __init__(self) -> None:
         script_path = pathlib.Path(sys.modules[self.__module__].__file__)
         *_, year_pt, _ = script_path.parts
@@ -45,7 +45,7 @@ class SolutionBase:
                 else:
                     yield line
 
-    def run(self):
+    def run(self) -> None:
         print(f"Part 1: {self.part1()}")
         print(f"Part 2: {self.part2()}")
 

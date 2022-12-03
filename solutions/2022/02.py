@@ -3,7 +3,7 @@ from libaoc import SolutionBase
 
 class Solution(SolutionBase):
     def part1(self):
-        MATCH_SCORE = {
+        match_score = {
             ("A", "X"): 3,
             ("A", "Y"): 6,
             ("A", "Z"): 0,
@@ -15,7 +15,7 @@ class Solution(SolutionBase):
             ("C", "Z"): 3,
         }
 
-        PLAY_SCORE = {
+        play_score = {
             "X": 1,
             "Y": 2,
             "Z": 3,
@@ -25,13 +25,13 @@ class Solution(SolutionBase):
 
         for row in self.input():
             a, b = row.strip().split(" ")
-            score += MATCH_SCORE[(a, b)]
-            score += PLAY_SCORE[b]
+            score += match_score[(a, b)]
+            score += play_score[b]
 
         return score
 
     def part2(self):
-        PLAY_SCORE = {
+        play_score = {
             ("A", "X"): 3,
             ("A", "Y"): 1,
             ("A", "Z"): 2,
@@ -43,7 +43,7 @@ class Solution(SolutionBase):
             ("C", "Z"): 1,
         }
 
-        MATCH_SCORE = {
+        match_score = {
             "X": 0,
             "Y": 3,
             "Z": 6,
@@ -53,8 +53,8 @@ class Solution(SolutionBase):
 
         for row in self.input():
             a, b = row.strip().split(" ")
-            score += PLAY_SCORE[(a, b)]
-            score += MATCH_SCORE[b]
+            score += play_score[(a, b)]
+            score += match_score[b]
 
         return score
 
