@@ -35,13 +35,11 @@ class SolutionBase(abc.ABC):
         day = int(script_path.stem)
         self.data_file = get_data_file(year, day)
 
-    def input(
-        self, strip: bool = True, newline: str | None = None
-    ) -> Generator[str, None, None]:
-        with self.data_file.open(newline=newline) as fp:
+    def input(self, strip: bool = True) -> Generator[str, None, None]:
+        with self.data_file.open() as fp:
             for line in fp:
                 if strip:
-                    yield line.strip()
+                    yield line.rstrip("\n")
                 else:
                     yield line
 
