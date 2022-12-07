@@ -1,12 +1,16 @@
+from collections import deque
+
 from libaoc import SolutionBase
 
 
 class Solution(SolutionBase):
     def result(self, size: int):
         line = next(self.input())
-        for i in range(len(line) - (size - 1)):
-            if len(set(line[i : i + size])) == size:
-                return i + size
+        window = deque(maxlen=size)
+        for i, char in enumerate(line, start=1):
+            window.append(char)
+            if len(window) == size and len(set(window)) == size:
+                return i
 
     def part1(self):
         return self.result(4)
