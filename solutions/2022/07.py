@@ -31,6 +31,8 @@ class Solution(SolutionBase):
         while len(lines) > 0:
             _, cmd, *args = lines.popleft().split(" ")
             if cmd == "ls":
+                # in case we `ls` twice in the same directory
+                cur_dir.size = 0
                 while len(lines) > 0:
                     line = lines.popleft()
                     parts = line.split(" ")
