@@ -44,8 +44,9 @@ class SolutionBase(abc.ABC):
                     yield line
 
     def run(self) -> None:
-        print(f"Part 1: {self.part1()}")
-        print(f"Part 2: {self.part2()}")
+        print(f"Part 1: \n{self.part1()}")
+        print()
+        print(f"Part 2: \n{self.part2()}")
 
     @abc.abstractmethod
     def part1(self):
