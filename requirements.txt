@@ -2,3 +2,4 @@ more-itertools
 pytest
 PyYAML
 requests
+tqdm
