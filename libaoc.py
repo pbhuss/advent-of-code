@@ -28,12 +28,15 @@ def get_data_file(year: int, day: int) -> pathlib.Path:
 
 
 class SolutionBase(abc.ABC):
-    def __init__(self) -> None:
+    def __init__(self, example: bool = False) -> None:
         script_path = pathlib.Path(sys.modules[self.__module__].__file__)
         *_, year_pt, _ = script_path.parts
         year = int(year_pt)
         day = int(script_path.stem)
-        self.data_file = get_data_file(year, day)
+        if example:
+            self.data_file = pathlib.Path(f"example_data/{year}/{day:02d}.txt")
+        else:
+            self.data_file = get_data_file(year, day)
 
     def input(self, strip: bool = True) -> Generator[str, None, None]:
         with self.data_file.open() as fp:
