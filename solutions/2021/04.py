@@ -54,7 +54,7 @@ class Solution(SolutionBase):
         calls, boards, board_states, num_to_pos = self.get_boards()
 
         for call in calls:
-            for (i, j, k) in num_to_pos[call]:
+            for i, j, k in num_to_pos[call]:
                 board_states[i][j][k] = True
             for board, board_state in zip(boards, board_states):
                 if check_board(board_state):
@@ -66,7 +66,7 @@ class Solution(SolutionBase):
         final_board = None
         final_board_state = None
         for call in calls:
-            for (i, j, k) in num_to_pos[call]:
+            for i, j, k in num_to_pos[call]:
                 board_states[i][j][k] = True
             if final:
                 if check_board(final_board_state):

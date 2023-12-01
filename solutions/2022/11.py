@@ -16,7 +16,6 @@ logger = logging.getLogger(__name__)
 
 
 class Monkey(NamedTuple):
-
     items: list[int]
     operation: Callable[[int], int]
     divisor: int
