@@ -7,14 +7,12 @@ from libaoc import SolutionBase
 
 
 class State(NamedTuple):
-
     current_position: str
     time_remaining: int
     valves_closed: frozenset[str]
 
 
 class TwoState(NamedTuple):
-
     current_positions: frozenset[str]
     time_remaining: int
     valves_closed: frozenset[str]
