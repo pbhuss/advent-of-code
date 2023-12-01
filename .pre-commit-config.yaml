@@ -15,15 +15,15 @@ repos:
     rev: v3.15.0
     hooks:
     -   id: pyupgrade
-        args: [--py311-plus]
+        args: [--py312-plus]
 -   repo: https://github.com/asottile/reorder_python_imports
     rev: v3.12.0
     hooks:
     -   id: reorder-python-imports
-        args: [--py311-plus]
+        args: [--py312-plus]
 -   repo: https://github.com/psf/black
     rev: 23.11.0
     hooks:
     -   id: black
 default_language_version:
-    python: python3.11
+    python: python3.12
