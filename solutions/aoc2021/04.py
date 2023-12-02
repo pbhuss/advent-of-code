@@ -1,6 +1,5 @@
 from collections import defaultdict
-
-from more_itertools import chunked
+from itertools import batched
 
 from libaoc import SolutionBase
 
@@ -42,7 +41,7 @@ class Solution(SolutionBase):
         num_to_pos = defaultdict(list)
         boards = []
         for i, board_lines in enumerate(
-            chunked(input_, 6)
+            batched(input_, 6)
         ):  # 5 board lines + 1 separator line
             board = []
             for j, line in enumerate(board_lines[:5]):

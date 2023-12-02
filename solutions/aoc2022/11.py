@@ -4,9 +4,8 @@ import operator
 import re
 from collections.abc import Callable
 from functools import partial
+from itertools import batched
 from typing import NamedTuple
-
-from more_itertools import chunked
 
 from libaoc import SolutionBase
 
@@ -32,7 +31,7 @@ class Solution(SolutionBase):
         monkeys = []
         num_pattern = re.compile(r"\d+")
         operation_re = re.compile(r"([+*]) (old|[0-9]+)")
-        for lines in chunked(self.input(), 7):
+        for lines in batched(self.input(), 7):
             items = list(map(int, num_pattern.findall(lines[1])))
             op_str, op_right = operation_re.search(lines[2]).groups((2, 3))
             op = operator.add if op_str == "+" else operator.mul

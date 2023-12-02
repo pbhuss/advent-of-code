@@ -1,7 +1,6 @@
 import operator
 from functools import reduce
-
-from more_itertools import chunked
+from itertools import batched
 
 from libaoc import SolutionBase
 
@@ -19,7 +18,7 @@ class Solution(SolutionBase):
 
     def part2(self) -> int:
         total = 0
-        for rows in chunked(self.input(), 3):
+        for rows in batched(self.input(), 3):
             (c,) = reduce(operator.and_, map(set, rows))
             if c.islower():
                 total += ord(c) - ord("a") + 1
