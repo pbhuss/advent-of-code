@@ -1,9 +1,8 @@
 import json
 import math
 from functools import cmp_to_key
+from itertools import batched
 from itertools import zip_longest
-
-from more_itertools import chunked
 
 from libaoc import SolutionBase
 
@@ -38,7 +37,7 @@ def check(left: int | list, right: int | list) -> bool | None:
 class Solution(SolutionBase):
     def part1(self) -> int:
         result = 0
-        for idx, lines in enumerate(chunked(self.input(), 3), start=1):
+        for idx, lines in enumerate(batched(self.input(), 3), start=1):
             left = json.loads(lines[0])
             right = json.loads(lines[1])
             if check(left, right):
