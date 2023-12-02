@@ -2,7 +2,7 @@ from libaoc import SolutionBase
 
 
 class Solution(SolutionBase):
-    def part1(self):
+    def part1(self) -> int:
         horizontal = 0
         depth = 0
         for line in self.input():
@@ -15,7 +15,7 @@ class Solution(SolutionBase):
                     horizontal += int(n)
         return horizontal * depth
 
-    def part2(self):
+    def part2(self) -> int:
         horizontal = 0
         depth = 0
         aim = 0
@@ -26,9 +26,8 @@ class Solution(SolutionBase):
                 case "up", n:
                     aim -= int(n)
                 case "forward", n:
-                    n = int(n)
-                    horizontal += n
-                    depth += aim * n
+                    horizontal += int(n)
+                    depth += aim * int(n)
         return horizontal * depth
 
 

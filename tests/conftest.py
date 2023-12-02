@@ -1,13 +1,14 @@
 import pkgutil
 import re
 from importlib import import_module
+from types import ModuleType
 
 import pytest
 
 import solutions
 
 
-def load_solution_modules():
+def load_solution_modules() -> dict[str, ModuleType]:
     module_map = {}
     pattern = re.compile(r"(\d{4})\.(\d{2})")
     for _, modname, is_pkg in pkgutil.walk_packages(
@@ -23,7 +24,7 @@ def load_solution_modules():
     return module_map
 
 
-def pytest_addoption(parser):
+def pytest_addoption(parser: pytest.Parser) -> None:
     solution_modules = load_solution_modules()
     parser.addoption(
         "--solutions",
@@ -35,10 +36,10 @@ def pytest_addoption(parser):
     )
 
 
-def pytest_generate_tests(metafunc):
+def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
     metafunc.parametrize("problem", metafunc.config.option.solutions)
 
 
 @pytest.fixture(scope="session")
-def solution_modules():
+def solution_modules() -> dict[str, ModuleType]:
     return load_solution_modules()

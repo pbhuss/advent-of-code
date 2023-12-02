@@ -29,9 +29,11 @@ def get_data_file(year: int, day: int) -> pathlib.Path:
 
 class SolutionBase(abc.ABC):
     def __init__(self, example: bool = False) -> None:
-        script_path = pathlib.Path(sys.modules[self.__module__].__file__)
+        script_file = sys.modules[self.__module__].__file__
+        assert script_file is not None
+        script_path = pathlib.Path(script_file)
         *_, year_pt, _ = script_path.parts
-        year = int(year_pt)
+        year = int(year_pt.lstrip("aoc"))
         day = int(script_path.stem)
         if example:
             self.data_file = pathlib.Path(f"example_data/{year}/{day:02d}.txt")
@@ -52,9 +54,9 @@ class SolutionBase(abc.ABC):
         print(f"Part 2: \n{self.part2()}")
 
     @abc.abstractmethod
-    def part1(self):
+    def part1(self) -> int | str:
         return ""
 
     @abc.abstractmethod
-    def part2(self):
+    def part2(self) -> int | str:
         return ""

@@ -38,7 +38,7 @@ def heuristic_two(state: TwoState, valve_to_rate: dict[str, int]) -> int:
 
 
 class Solution(SolutionBase):
-    def part1(self):
+    def part1(self) -> int:
         valve_pattern = re.compile(r"[A-Z]{2}")
         rate_pattern = re.compile(r"\d+")
         valve_to_rate = {}
@@ -116,7 +116,7 @@ class Solution(SolutionBase):
                     open_set.put((f_score[new_state], new_state))
         raise Exception("unreachable")
 
-    def part2(self):
+    def part2(self) -> int:
         valve_pattern = re.compile(r"[A-Z]{2}")
         rate_pattern = re.compile(r"\d+")
         valve_to_rate = {}

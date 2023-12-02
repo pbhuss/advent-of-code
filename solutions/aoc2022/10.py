@@ -2,7 +2,7 @@ from libaoc import SolutionBase
 
 
 class Solution(SolutionBase):
-    def part1(self):
+    def part1(self) -> int:
         result = 0
         cycle = 0
         value = 1
@@ -19,7 +19,7 @@ class Solution(SolutionBase):
                 break
         return result
 
-    def part2(self):
+    def part2(self) -> str:
         rows = []
         cycle = 0
         value = 1

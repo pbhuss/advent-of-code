@@ -32,9 +32,11 @@ def check(left: int | list, right: int | list) -> bool | None:
         if isinstance(sub, bool):
             return sub
 
+    return None
+
 
 class Solution(SolutionBase):
-    def part1(self):
+    def part1(self) -> int:
         result = 0
         for idx, lines in enumerate(chunked(self.input(), 3), start=1):
             left = json.loads(lines[0])
@@ -43,7 +45,7 @@ class Solution(SolutionBase):
                 result += idx
         return result
 
-    def part2(self):
+    def part2(self) -> int:
         dividers = [[[2]], [[6]]]
         rows = dividers.copy()
         for line in self.input():

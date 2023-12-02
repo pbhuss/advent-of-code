@@ -23,7 +23,7 @@ def draw_grid(source, walls, filled):
 
 
 class Solution(SolutionBase):
-    def part1(self, draw=False):
+    def part1(self, draw=False) -> int:
         walls = set()
         for line in self.input():
             points = line.split(" -> ")
@@ -67,7 +67,7 @@ class Solution(SolutionBase):
                         draw_grid(source, walls, filled)
                     return count
 
-    def part2(self, draw=False):
+    def part2(self, draw=False) -> int:
         walls = set()
         for line in self.input():
             points = line.split(" -> ")

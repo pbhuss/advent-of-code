@@ -2,7 +2,7 @@ from libaoc import SolutionBase
 
 
 class Solution(SolutionBase):
-    def part1(self):
+    def part1(self) -> int:
         match_score = {
             ("A", "X"): 3,
             ("A", "Y"): 6,
@@ -30,7 +30,7 @@ class Solution(SolutionBase):
 
         return score
 
-    def part2(self):
+    def part2(self) -> int:
         play_score = {
             ("A", "X"): 3,
             ("A", "Y"): 1,
