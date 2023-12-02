@@ -4,7 +4,9 @@ from queue import PriorityQueue
 from libaoc import SolutionBase
 
 
-def neighbors(grid, x, y):
+def neighbors(
+    grid: dict[tuple[int, int], int], x: int, y: int
+) -> list[tuple[int, int]]:
     return [
         (x + i, y + j)
         for i, j in [(0, -1), (0, 1), (1, 0), (-1, 0)]
@@ -12,7 +14,7 @@ def neighbors(grid, x, y):
     ]
 
 
-def neighbors_reverse(grid, x, y):
+def neighbors_reverse(grid: dict[tuple[int, int], int], x: int, y: int):
     return [
         (x + i, y + j)
         for i, j in [(0, -1), (0, 1), (1, 0), (-1, 0)]
@@ -22,7 +24,7 @@ def neighbors_reverse(grid, x, y):
 
 # TODO: DRY this up
 class Solution(SolutionBase):
-    def part1(self):
+    def part1(self) -> int:
         grid = {}
         start = None
         end = None
@@ -64,7 +66,9 @@ class Solution(SolutionBase):
                     dists[neighbor] = alt_dist
                     queue.put((alt_dist, neighbor))
 
-    def part2(self):
+        raise Exception("unreachable")
+
+    def part2(self) -> int:
         grid = {}
         start = None
         ends = []

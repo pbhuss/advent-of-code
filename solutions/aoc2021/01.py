@@ -4,7 +4,7 @@ from libaoc import SolutionBase
 
 
 class Solution(SolutionBase):
-    def part1(self):
+    def part1(self) -> int:
         total = 0
         cur = None
         for line in self.input():
@@ -14,8 +14,8 @@ class Solution(SolutionBase):
             cur = new
         return total
 
-    def part2(self):
-        sums = defaultdict(int)
+    def part2(self) -> int:
+        sums: dict[int, int] = defaultdict(int)
         for i, row in enumerate(self.input()):
             value = int(row)
             for j in range(0, 3):

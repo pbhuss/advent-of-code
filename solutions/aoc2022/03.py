@@ -7,7 +7,7 @@ from libaoc import SolutionBase
 
 
 class Solution(SolutionBase):
-    def part1(self):
+    def part1(self) -> int:
         total = 0
         for line in self.input():
             (c,) = set(line[: len(line) // 2]) & set(line[len(line) // 2 :])
@@ -17,7 +17,7 @@ class Solution(SolutionBase):
                 total += ord(c) - ord("A") + 27
         return total
 
-    def part2(self):
+    def part2(self) -> int:
         total = 0
         for rows in chunked(self.input(), 3):
             (c,) = reduce(operator.and_, map(set, rows))

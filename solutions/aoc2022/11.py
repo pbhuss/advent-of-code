@@ -94,10 +94,10 @@ class Solution(SolutionBase):
         inspect_counts.sort()
         return inspect_counts[-1] * inspect_counts[-2]
 
-    def part1(self):
+    def part1(self) -> int:
         return self.solve(num_rounds=20, divide=True)
 
-    def part2(self):
+    def part2(self) -> int:
         return self.solve(num_rounds=10000, divide=False)
 
 

@@ -1,12 +1,14 @@
+from collections.abc import Iterator
+
 from libaoc import SolutionBase
 
 
-def get_pairs(line):
+def get_pairs(line: str) -> Iterator[tuple[int, ...]]:
     return (tuple(map(int, seg.split("-"))) for seg in line.split(","))
 
 
 class Solution(SolutionBase):
-    def part1(self):
+    def part1(self) -> int:
         count = 0
         for line in self.input():
             (a1, a2), (b1, b2) = get_pairs(line)
@@ -14,7 +16,7 @@ class Solution(SolutionBase):
                 count += 1
         return count
 
-    def part2(self):
+    def part2(self) -> int:
         count = 0
         for line in self.input():
             (a1, a2), (b1, b2) = get_pairs(line)

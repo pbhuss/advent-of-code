@@ -9,9 +9,9 @@ from libaoc import SolutionBase
 class Color:
     name: str
     threshold: int
-    pattern: re.Pattern = field(init=False)
+    pattern: re.Pattern[str] = field(init=False)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.pattern = re.compile(rf"(\d+) {self.name}")
 
 
@@ -19,7 +19,7 @@ COLORS = [Color("red", 12), Color("green", 13), Color("blue", 14)]
 
 
 class Solution(SolutionBase):
-    def part1(self):
+    def part1(self) -> int:
         total = 0
         for idx, line in enumerate(self.input(), start=1):
             if all(
@@ -33,7 +33,7 @@ class Solution(SolutionBase):
 
         return total
 
-    def part2(self):
+    def part2(self) -> int:
         total = 0
         for idx, line in enumerate(self.input(), start=1):
             power = 1

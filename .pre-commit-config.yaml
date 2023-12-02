@@ -25,5 +25,12 @@ repos:
     rev: 23.11.0
     hooks:
     -   id: black
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.7.1
+    hooks:
+    -   id: mypy
+        additional_dependencies:
+            - types-PyYAML
+            - types-requests
 default_language_version:
     python: python3.12

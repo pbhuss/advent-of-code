@@ -4,7 +4,7 @@ from collections.abc import Callable
 from libaoc import SolutionBase
 
 
-def reduce_value(lines: list[str], op: Callable) -> str:
+def reduce_value(lines: list[str], op: Callable[[int, int], bool]) -> str:
     i = 0
     while len(lines) > 1:
         a0 = [line for line in lines if line[i] == "0"]
@@ -15,7 +15,7 @@ def reduce_value(lines: list[str], op: Callable) -> str:
 
 
 class Solution(SolutionBase):
-    def part1(self):
+    def part1(self) -> int:
         counts = [0] * len(next(self.input()))
         for line in self.input():
             for i, char in enumerate(line):
@@ -27,7 +27,7 @@ class Solution(SolutionBase):
         b = "".join("1" if count > 0 else "0" for count in counts)
         return int(a, base=2) * int(b, base=2)
 
-    def part2(self):
+    def part2(self) -> int:
         lines = list(self.input())
 
         a = reduce_value(lines, operator.ge)

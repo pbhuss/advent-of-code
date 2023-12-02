@@ -2,7 +2,7 @@ from libaoc import SolutionBase
 
 
 class Solution(SolutionBase):
-    def part1(self):
+    def part1(self) -> int:
         max_group = 0
         cur_group = 0
         for line in self.input():
@@ -15,7 +15,7 @@ class Solution(SolutionBase):
 
         return max_group
 
-    def part2(self):
+    def part2(self) -> int:
         groups = []
         cur_group = 0
         for line in self.input():

@@ -19,21 +19,20 @@ def add_coords(*coords: Coord) -> Coord:
 
 
 class Solution(SolutionBase):
-    def solve(self, num_tails: int):
-        head = (0, 0)
-        tails = [(0, 0) for _ in range(num_tails)]
+    def solve(self, num_tails: int) -> int:
+        head = Coord((0, 0))
+        tails = [Coord((0, 0)) for _ in range(num_tails)]
         visited = {tails[-1]}
         moves = {
-            "U": (0, -1),
-            "D": (0, 1),
-            "L": (-1, 0),
-            "R": (1, 0),
+            "U": Coord((0, -1)),
+            "D": Coord((0, 1)),
+            "L": Coord((-1, 0)),
+            "R": Coord((1, 0)),
         }
         for line in self.input():
             move, distance = line.split()
-            distance = int(distance)
             head_move = moves[move]
-            for _ in range(distance):
+            for _ in range(int(distance)):
                 head = add_coords(head, head_move)
                 cur_head = head
                 for i, tail in enumerate(tails):
@@ -42,10 +41,10 @@ class Solution(SolutionBase):
                 visited.add(cur_head)
         return len(visited)
 
-    def part1(self):
+    def part1(self) -> int:
         return self.solve(1)
 
-    def part2(self):
+    def part2(self) -> int:
         return self.solve(9)
 
 

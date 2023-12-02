@@ -8,7 +8,7 @@ from libaoc import SolutionBase
 
 class Directory:
     def __init__(self, parent: Directory | None) -> None:
-        self.directories = {}
+        self.directories: dict[str, Directory] = {}
         self.size = 0
         self.parent = parent
 
@@ -26,7 +26,7 @@ class Directory:
 class Solution(SolutionBase):
     def get_tree(self) -> Directory:
         root = Directory(None)
-        cur_dir: Directory | None = None
+        cur_dir: Directory
         lines = deque(self.input())
         while len(lines) > 0:
             _, cmd, *args = lines.popleft().split(" ")
@@ -46,22 +46,24 @@ class Solution(SolutionBase):
                 if target == "/":
                     cur_dir = root
                 elif target == "..":
-                    cur_dir = cur_dir.parent
+                    parent_directory = cur_dir.parent
+                    assert parent_directory is not None
+                    cur_dir = parent_directory
                 else:
                     cur_dir = cur_dir.directories.setdefault(target, Directory(cur_dir))
         return root
 
-    def part1(self):
+    def part1(self) -> int:
         return self.get_tree().sum_below(100000)
 
-    def part2(self):
+    def part2(self) -> int:
         total = 70000000
         required = 30000000
         tree = self.get_tree()
         free = total - tree.full_size
         sizes = []
 
-        def add_sizes(directory):
+        def add_sizes(directory: Directory) -> None:
             sizes.append(directory.full_size)
             for subdir in directory.directories.values():
                 add_sizes(subdir)
@@ -71,6 +73,8 @@ class Solution(SolutionBase):
         for size in sorted(sizes):
             if size + free >= required:
                 return size
+
+        raise Exception("unreachable")
 
 
 if __name__ == "__main__":
