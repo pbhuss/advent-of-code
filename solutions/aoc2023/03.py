@@ -20,15 +20,13 @@ def surrounding(x: int, y: int, grid: Grid) -> Iterator[Coord]:
 
 def get_number(i: int, j: int, grid: Grid) -> tuple[int, Coord]:
     width = len(grid[0])
-    while i >= 0 and grid[j][i].isdigit():
-        i -= 1
-    i += 1
-    pos = (i, j)
-    nums = []
-    while i < width and grid[j][i].isdigit():
-        nums.append(grid[j][i])
-        i += 1
-    return int("".join(nums)), pos
+    l_bound = r_bound = i
+    while l_bound - 1 >= 0 and grid[j][l_bound - 1].isdigit():
+        l_bound -= 1
+    pos = (l_bound, j)
+    while r_bound < width and grid[j][r_bound].isdigit():
+        r_bound += 1
+    return int("".join(grid[j][l_bound:r_bound])), pos
 
 
 class Solution(SolutionBase):
