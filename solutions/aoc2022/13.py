@@ -7,7 +7,10 @@ from itertools import zip_longest
 from libaoc import SolutionBase
 
 
-def check(left: int | list, right: int | list) -> bool | None:
+Item = int | list["Item"]
+
+
+def check(left: Item, right: Item) -> bool | None:
     if isinstance(left, int) and isinstance(right, int):
         if left > right:
             return False
@@ -34,6 +37,10 @@ def check(left: int | list, right: int | list) -> bool | None:
     return None
 
 
+def cmp(left: Item, right: Item) -> int:
+    return -1 if check(left, right) else 1
+
+
 class Solution(SolutionBase):
     def part1(self) -> int:
         result = 0
@@ -45,12 +52,14 @@ class Solution(SolutionBase):
         return result
 
     def part2(self) -> int:
-        dividers = [[[2]], [[6]]]
-        rows = dividers.copy()
+        dividers: Item = [[[2]], [[6]]]
+        assert isinstance(dividers, list)
+        rows: Item = dividers.copy()
+        assert isinstance(rows, list)
         for line in self.input():
             if line != "":
                 rows.append(json.loads(line))
-        rows.sort(key=cmp_to_key(lambda left, right: -1 if check(left, right) else 1))
+        rows.sort(key=cmp_to_key(cmp))
         return math.prod(rows.index(divider) + 1 for divider in dividers)
 
 

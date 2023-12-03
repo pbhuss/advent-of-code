@@ -4,7 +4,11 @@ from itertools import batched
 from libaoc import SolutionBase
 
 
-def check_board(board_state: list[list[bool]]) -> bool:
+Board = list[list[int]]
+BoardState = list[list[bool]]
+
+
+def check_board(board_state: BoardState) -> bool:
     for i in range(5):
         if all(board_state[i][j] for j in range(5)) or all(
             board_state[j][i] for j in range(5)
@@ -13,7 +17,7 @@ def check_board(board_state: list[list[bool]]) -> bool:
     return False
 
 
-def sum_unrevealed(board: list[list[int]], board_state: list[list[bool]]) -> int:
+def sum_unrevealed(board: Board, board_state: BoardState) -> int:
     return sum(
         val
         for row, row_state in zip(board, board_state)
@@ -27,8 +31,8 @@ class Solution(SolutionBase):
         self,
     ) -> tuple[
         list[int],
-        list[list[list[int]]],
-        list[list[list[bool]]],
+        list[Board],
+        list[BoardState],
         dict[int, list[tuple[int, int, int]]],
     ]:
         # TODO: fix typing
