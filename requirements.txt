@@ -1,4 +1,7 @@
+mypy
 pytest
 PyYAML
 requests
 tqdm
+types-PyYAML
+types-requests
