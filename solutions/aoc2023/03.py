@@ -1,3 +1,5 @@
+from collections.abc import Callable
+from collections.abc import Collection
 from collections.abc import Iterator
 
 from libaoc import SolutionBase
@@ -30,7 +32,7 @@ def get_number(i: int, j: int, grid: Grid) -> tuple[int, Coord]:
 
 
 class Solution(SolutionBase):
-    def part1(self) -> int:
+    def solve(self, scorer: Callable[[Collection[int]], int]) -> int:
         total = 0
         grid = [[char for char in line] for line in self.input()]
         for y, col in enumerate(grid):
@@ -42,25 +44,23 @@ class Solution(SolutionBase):
                         if adj.isdigit():
                             num, pos = get_number(i, j, grid)
                             numbers[pos] = num
-                    total += sum(numbers.values())
+                    total += scorer(numbers.values())
         return total
 
+    def part1(self) -> int:
+        def scorer(values: Collection[int]) -> int:
+            return sum(values)
+
+        return self.solve(scorer)
+
     def part2(self) -> int:
-        total = 0
-        grid = [[char for char in line] for line in self.input()]
-        for y, col in enumerate(grid):
-            for x, val in enumerate(col):
-                if not val.isdigit() and val != ".":
-                    numbers = {}
-                    for i, j in surrounding(x, y, grid):
-                        adj = grid[j][i]
-                        if adj.isdigit():
-                            num, pos = get_number(i, j, grid)
-                            numbers[pos] = num
-                    if len(numbers) == 2:
-                        a, b = numbers.values()
-                        total += a * b
-        return total
+        def scorer(values: Collection[int]) -> int:
+            if len(values) == 2:
+                a, b = values
+                return a * b
+            return 0
+
+        return self.solve(scorer)
 
 
 if __name__ == "__main__":
