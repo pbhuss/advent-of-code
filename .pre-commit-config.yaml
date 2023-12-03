@@ -31,6 +31,5 @@ repos:
     -   id: mypy
         additional_dependencies:
             - types-PyYAML
-            - types-requests
 default_language_version:
     python: python3.12
