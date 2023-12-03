@@ -5,8 +5,14 @@ from tqdm import trange
 from libaoc import SolutionBase
 
 
+def must_match(pattern: re.Pattern[str], text: str) -> re.Match[str]:
+    match = pattern.match(text)
+    assert match is not None
+    return match
+
+
 class Solution(SolutionBase):
-    def part1(self, y_check=2000000):
+    def part1(self, y_check: int = 2000000) -> int:
         pattern = re.compile(
             r"Sensor at x=(-?\d+), y=(-?\d+): closest beacon is at x=(-?\d+), y=(-?\d+)"
         )
@@ -15,7 +21,7 @@ class Solution(SolutionBase):
 
         for line in self.input():
             sensor_x, sensor_y, beacon_x, beacon_y = map(
-                int, pattern.match(line).group(1, 2, 3, 4)
+                int, must_match(pattern, line).group(1, 2, 3, 4)
             )
             if beacon_y == y_check:
                 x_beacon.add(beacon_x)
@@ -26,7 +32,7 @@ class Solution(SolutionBase):
 
         return len(x_no_beacon - x_beacon)
 
-    def part2(self, max_pos=4000000):
+    def part2(self, max_pos: int = 4000000) -> int:
         pattern = re.compile(
             r"Sensor at x=(-?\d+), y=(-?\d+): closest beacon is at x=(-?\d+), y=(-?\d+)"
         )
@@ -34,7 +40,7 @@ class Solution(SolutionBase):
         sensors = []
         for line in self.input():
             sensor_x, sensor_y, beacon_x, beacon_y = map(
-                int, pattern.match(line).group(1, 2, 3, 4)
+                int, must_match(pattern, line).group(1, 2, 3, 4)
             )
             beacon_dist = abs(sensor_x - beacon_x) + abs(sensor_y - beacon_y)
             sensors.append(((sensor_x, sensor_y), beacon_dist))

@@ -14,7 +14,9 @@ def neighbors(
     ]
 
 
-def neighbors_reverse(grid: dict[tuple[int, int], int], x: int, y: int):
+def neighbors_reverse(
+    grid: dict[tuple[int, int], int], x: int, y: int
+) -> list[tuple[int, int]]:
     return [
         (x + i, y + j)
         for i, j in [(0, -1), (0, 1), (1, 0), (-1, 0)]
@@ -26,7 +28,7 @@ def neighbors_reverse(grid: dict[tuple[int, int], int], x: int, y: int):
 class Solution(SolutionBase):
     def part1(self) -> int:
         grid = {}
-        start = None
+        start: tuple[int, int]
         end = None
         for y, line in enumerate(self.input()):
             for x, val in enumerate(line):
@@ -41,11 +43,11 @@ class Solution(SolutionBase):
 
         n_col, n_row = map(lambda x: x + 1, max(grid))
 
-        dists = {}
+        dists: dict[tuple[int, int], int | float] = {}
         visited = set()
         dists[start] = 0
 
-        queue = PriorityQueue()
+        queue: PriorityQueue[tuple[int, tuple[int, int]]] = PriorityQueue()
         queue.put((0, start))
         for x in range(n_col):
             for y in range(n_row):
@@ -56,7 +58,9 @@ class Solution(SolutionBase):
         while not queue.empty():
             dist, pos = queue.get()
             if pos == end:
-                return dists[end]
+                result = dists[end]
+                assert isinstance(result, int)
+                return result
             if pos in visited:
                 continue
             visited.add(pos)
@@ -70,7 +74,7 @@ class Solution(SolutionBase):
 
     def part2(self) -> int:
         grid = {}
-        start = None
+        start: tuple[int, int]
         ends = []
         for y, line in enumerate(self.input()):
             for x, val in enumerate(line):
@@ -87,11 +91,11 @@ class Solution(SolutionBase):
 
         n_col, n_row = map(lambda x: x + 1, max(grid))
 
-        dists = {}
+        dists: dict[tuple[int, int], int | float] = {}
         visited = set()
         dists[start] = 0
 
-        queue = PriorityQueue()
+        queue: PriorityQueue[tuple[int, tuple[int, int]]] = PriorityQueue()
         queue.put((0, start))
         for x in range(n_col):
             for y in range(n_row):
@@ -110,7 +114,9 @@ class Solution(SolutionBase):
                     dists[neighbor] = alt_dist
                     queue.put((alt_dist, neighbor))
 
-        return min(dists[end] for end in ends)
+        result = min(dists[end] for end in ends)
+        assert isinstance(result, int)
+        return result
 
 
 if __name__ == "__main__":
