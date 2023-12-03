@@ -46,7 +46,9 @@ class Solution(SolutionBase):
 
         for line in self.input():
             valve, *adj_valves = valve_pattern.findall(line)
-            flow_rate = int(rate_pattern.search(line).group(0))
+            rate_match = rate_pattern.search(line)
+            assert rate_match is not None
+            flow_rate = int(rate_match.group(0))
             if flow_rate > 0:
                 valve_to_rate[valve] = flow_rate
             valve_to_adjacents[valve] = set(adj_valves)
@@ -54,8 +56,8 @@ class Solution(SolutionBase):
         starting_state = State("AA", 30, frozenset(valve_to_rate))
 
         # A* Search
-        open_set = PriorityQueue()
-        came_from = {}
+        open_set: PriorityQueue[tuple[int, State]] = PriorityQueue()
+        came_from: dict[State, State] = {}
         g_score = {starting_state: 0}
         f_score = {starting_state: heuristic(starting_state, valve_to_rate)}
         open_set.put((f_score[starting_state], starting_state))
@@ -124,7 +126,9 @@ class Solution(SolutionBase):
 
         for line in self.input():
             valve, *adj_valves = valve_pattern.findall(line)
-            flow_rate = int(rate_pattern.search(line).group(0))
+            rate_match = rate_pattern.search(line)
+            assert rate_match is not None
+            flow_rate = int(rate_match.group(0))
             if flow_rate > 0:
                 valve_to_rate[valve] = flow_rate
             valve_to_adjacents[valve] = set(adj_valves)
@@ -132,8 +136,8 @@ class Solution(SolutionBase):
         starting_state = TwoState(frozenset({"AA"}), 26, frozenset(valve_to_rate))
 
         # A* Search
-        open_set = PriorityQueue()
-        came_from = {}
+        open_set: PriorityQueue[tuple[int, TwoState]] = PriorityQueue()
+        came_from: dict[TwoState, TwoState] = {}
         g_score = {starting_state: 0}
         f_score = {starting_state: heuristic_two(starting_state, valve_to_rate)}
         open_set.put((f_score[starting_state], starting_state))

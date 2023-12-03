@@ -1,7 +1,13 @@
+from collections.abc import Collection
+
 from libaoc import SolutionBase
 
 
-def draw_grid(source, walls, filled):
+def draw_grid(
+    source: tuple[int, int],
+    walls: Collection[tuple[int, int]],
+    filled: Collection[tuple[int, int]],
+) -> None:
     min_x = min(x for x, _ in filled)
     max_x = max(x for x, _ in filled)
     max_y = max(y for _, y in filled)
@@ -23,7 +29,7 @@ def draw_grid(source, walls, filled):
 
 
 class Solution(SolutionBase):
-    def part1(self, draw=False) -> int:
+    def part1(self, draw: bool = False) -> int:
         walls = set()
         for line in self.input():
             points = line.split(" -> ")
@@ -67,7 +73,7 @@ class Solution(SolutionBase):
                         draw_grid(source, walls, filled)
                     return count
 
-    def part2(self, draw=False) -> int:
+    def part2(self, draw: bool = False) -> int:
         walls = set()
         for line in self.input():
             points = line.split(" -> ")

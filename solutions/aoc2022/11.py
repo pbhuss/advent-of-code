@@ -26,6 +26,12 @@ def square(x: int) -> int:
     return x**2
 
 
+def must_search(pattern: re.Pattern[str], text: str) -> re.Match[str]:
+    match = pattern.search(text)
+    assert match is not None
+    return match
+
+
 class Solution(SolutionBase):
     def solve(self, num_rounds: int, divide: bool) -> int:
         monkeys = []
@@ -33,14 +39,17 @@ class Solution(SolutionBase):
         operation_re = re.compile(r"([+*]) (old|[0-9]+)")
         for lines in batched(self.input(), 7):
             items = list(map(int, num_pattern.findall(lines[1])))
-            op_str, op_right = operation_re.search(lines[2]).groups((2, 3))
+            operation_match = operation_re.search(lines[2])
+            assert operation_match is not None
+            op_str, op_right = operation_match.groups((2, 3))
             op = operator.add if op_str == "+" else operator.mul
             if op_right == "old":
                 operation = square
             else:
+                assert isinstance(op_right, str)
                 operation = partial(op, int(op_right))
             divisor, true_idx, false_idx = map(
-                int, (num_pattern.search(line).group(0) for line in lines[3:6])
+                int, (must_search(num_pattern, line).group(0) for line in lines[3:6])
             )
             monkeys.append(
                 Monkey(

@@ -47,9 +47,8 @@ class Solution(SolutionBase):
             for j, line in enumerate(board_lines[:5]):
                 row = []
                 for k, num in enumerate(line.split()):
-                    num = int(num)
-                    num_to_pos[num].append((i, j, k))
-                    row.append(num)
+                    num_to_pos[int(num)].append((i, j, k))
+                    row.append(int(num))
                 board.append(row)
             boards.append(board)
 
