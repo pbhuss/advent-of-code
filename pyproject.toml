@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "advent-of-code"
+version = "0.1.0"
+description = "Solutions for Advent of Code (adventofcode.com)"
+authors = ["Peter Huss <5091033+pbhuss@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "~3.12"
+mypy = "^1.7.1"
+pytest = "^7.4.3"
+PyYAML = "^6.0.1"
+requests = "^2.31.0"
+tqdm = "^4.66.1"
+types-PyYAML = "^6.0.12.12"
+types-requests = "^2.31.0.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[mypy]
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
