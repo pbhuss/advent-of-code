@@ -3,7 +3,7 @@ import pathlib
 import sys
 from collections.abc import Generator
 
-import requests
+import urllib3
 
 
 def get_session_cookie() -> str:
@@ -16,14 +16,19 @@ def get_data_file(year: int, day: int) -> pathlib.Path:
     data_dir.mkdir(parents=True, exist_ok=True)
     data_file = data_dir / f"{day:02d}.txt"
     if not data_file.exists():
-        resp = requests.get(
-            f"https://adventofcode.com/{year}/day/{day}/input",
-            cookies={"session": get_session_cookie()},
-            headers={"User-Agent": "https://github.com/pbhuss/advent-of-code"},
+        url = f"https://adventofcode.com/{year}/day/{day}/input"
+        resp = urllib3.request(
+            method="GET",
+            url=url,
+            headers={
+                "User-Agent": "https://github.com/pbhuss/advent-of-code",
+                "Cookie": f"session={get_session_cookie()}",
+            },
         )
-        resp.raise_for_status()
-        with data_file.open("w") as fp:
-            fp.write(resp.text)
+        if 400 <= resp.status < 600:
+            raise Exception(f"{url} returned {resp.status}: {resp.reason}")
+        with data_file.open("wb") as fp:
+            fp.write(resp.data)
     return data_file
 
 

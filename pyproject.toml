@@ -10,10 +10,9 @@ python = "~3.12"
 mypy = "^1.7.1"
 pytest = "^7.4.3"
 PyYAML = "^6.0.1"
-requests = "^2.31.0"
 tqdm = "^4.66.1"
 types-PyYAML = "^6.0.12.12"
-types-requests = "^2.31.0.10"
+urllib3 = "^2.1.0"
 
 
 [build-system]
