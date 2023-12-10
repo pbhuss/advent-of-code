@@ -13,6 +13,7 @@ PyYAML = "^6.0.1"
 tqdm = "^4.66.1"
 types-PyYAML = "^6.0.12.12"
 urllib3 = "^2.1.0"
+networkx = "^3.2.1"
 
 
 [build-system]
