@@ -15,7 +15,7 @@ def get_expansion_map(seen: set[int], multiplier: int) -> dict[int, int]:
 
 
 class Solution(SolutionBase):
-    def solve(self, multiplier: int):
+    def solve(self, multiplier: int) -> int:
         x_seen = set()
         y_seen = set()
         galaxies = []
