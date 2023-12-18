@@ -37,7 +37,8 @@ def pytest_addoption(parser: pytest.Parser) -> None:
 
 
 def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
-    metafunc.parametrize("problem", metafunc.config.option.solutions)
+    if "problem" in metafunc.fixturenames:
+        metafunc.parametrize("problem", metafunc.config.option.solutions)
 
 
 @pytest.fixture(scope="session")

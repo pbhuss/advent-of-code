@@ -1,44 +1,16 @@
 from __future__ import annotations
 
-import enum
 import heapq
 from collections.abc import Callable
 from collections.abc import Iterable
 from dataclasses import dataclass
-from functools import total_ordering
 
 from libaoc import SolutionBase
-
-
-Grid = list[list[int]]
-
-
-@total_ordering
-class Direction(enum.Enum):
-    NORTH = (0, -1)
-    SOUTH = (0, 1)
-    EAST = (1, 0)
-    WEST = (-1, 0)
-
-    @property
-    def opposite(self) -> Direction:
-        match self:
-            case Direction.NORTH:
-                return Direction.SOUTH
-            case Direction.SOUTH:
-                return Direction.NORTH
-            case Direction.EAST:
-                return Direction.WEST
-            case Direction.WEST:
-                return Direction.EAST
-
-    @property
-    def adjacent(self) -> tuple[Direction, Direction]:
-        a1, a2 = set(Direction) - {self, self.opposite}
-        return a1, a2
-
-    def __lt__(self, other: Direction) -> bool:
-        return self.value < other.value
+from libaoc.grid import Coord
+from libaoc.grid import Direction
+from libaoc.grid import Grid
+from libaoc.grid import in_bounds
+from libaoc.grid import move
 
 
 @dataclass(frozen=True, order=True)
@@ -49,29 +21,25 @@ class State:
     count: int
 
     def move(self, direction: Direction) -> State:
-        x_offset, y_offset = direction.value
-        new_x = self.x + x_offset
-        new_y = self.y + y_offset
+        new_x, new_y = move((self.x, self.y), direction)
         if direction == self.direction:
             new_count = self.count + 1
         else:
             new_count = 1
         return State(new_x, new_y, direction, new_count)
 
-
-def in_bounds(grid: Grid, state: State) -> bool:
-    height = len(grid)
-    width = len(grid[0])
-    return 0 <= state.x < width and 0 <= state.y < height
+    @property
+    def coord(self) -> Coord:
+        return (self.x, self.y)
 
 
-AdjacencyFn = Callable[[Grid, State], Iterable[State]]
+AdjacencyFn = Callable[[Grid[int], State], Iterable[State]]
 
 
-def adjacent_part1(grid: Grid, state: State) -> tuple[State, ...]:
+def adjacent_part1(grid: Grid[int], state: State) -> tuple[State, ...]:
     return tuple(
         filter(
-            lambda new_state: in_bounds(grid, new_state) and new_state.count <= 3,
+            lambda new_state: in_bounds(new_state.coord, grid) and new_state.count <= 3,
             (
                 state.move(direction)
                 for direction in (state.direction,) + state.direction.adjacent
@@ -80,7 +48,7 @@ def adjacent_part1(grid: Grid, state: State) -> tuple[State, ...]:
     )
 
 
-def adjacent_part2(grid: Grid, state: State) -> tuple[State, ...]:
+def adjacent_part2(grid: Grid[int], state: State) -> tuple[State, ...]:
     if state.count == 0:
         valid_directions = tuple(Direction)
     elif state.count < 4:
@@ -91,14 +59,14 @@ def adjacent_part2(grid: Grid, state: State) -> tuple[State, ...]:
         valid_directions = state.direction.adjacent
     return tuple(
         filter(
-            lambda new_state: in_bounds(grid, new_state),
+            lambda new_state: in_bounds(new_state.coord, grid),
             (state.move(direction) for direction in valid_directions),
         )
     )
 
 
 def dijkstra(
-    grid: Grid,
+    grid: Grid[int],
     start_state: State,
     adjacency_fn: AdjacencyFn,
     min_stop: int,
@@ -145,7 +113,7 @@ class Solution(SolutionBase):
         super().__init__(example=example)
         self.verbose = verbose
 
-    def get_grid(self) -> Grid:
+    def get_grid(self) -> Grid[int]:
         return [[int(v) for v in row] for row in self.input()]
 
     def solve(self, adjacency_fn: AdjacencyFn, min_stop: int) -> int:

@@ -1,40 +1,20 @@
-import enum
 from itertools import chain
 
 from libaoc import SolutionBase
+from libaoc.grid import Coord
+from libaoc.grid import Direction
+from libaoc.grid import Grid
+from libaoc.grid import in_bounds
+from libaoc.grid import move
 
 
-Coord = tuple[int, int]
-Grid = list[list[str]]
-
-
-class Direction(enum.Enum):
-    NORTH = (0, -1)
-    SOUTH = (0, 1)
-    EAST = (1, 0)
-    WEST = (-1, 0)
-
-
-def move(coord: Coord, direction: Direction) -> Coord:
-    x, y = coord
-    x_move, y_move = direction.value
-    return x + x_move, y + y_move
-
-
-def in_bounds(coord: Coord, width: int, height: int) -> bool:
-    x, y = coord
-    return 0 <= x < width and 0 <= y < height
-
-
-def score(grid: Grid, start: Coord, start_direction: Direction) -> int:
+def score(grid: Grid[str], start: Coord, start_direction: Direction) -> int:
     energized = [[False for _ in row] for row in grid]
-    height = len(grid)
-    width = len(grid[0])
     seen = set()
     q = [(start, start_direction)]
     while q:
         val = (pos, direction) = q.pop()
-        if not in_bounds(pos, width, height) or val in seen:
+        if not in_bounds(pos, grid) or val in seen:
             continue
         seen.add(val)
         x, y = pos
@@ -76,7 +56,7 @@ def score(grid: Grid, start: Coord, start_direction: Direction) -> int:
 
 
 class Solution(SolutionBase):
-    def get_grid(self) -> Grid:
+    def get_grid(self) -> Grid[str]:
         return [[pos for pos in line] for line in self.input()]
 
     def part1(self) -> int:
