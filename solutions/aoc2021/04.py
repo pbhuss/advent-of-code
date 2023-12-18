@@ -2,10 +2,11 @@ from collections import defaultdict
 from itertools import batched
 
 from libaoc import SolutionBase
+from libaoc.grid import Grid
 
 
-Board = list[list[int]]
-BoardState = list[list[bool]]
+Board = Grid[int]
+BoardState = Grid[bool]
 
 
 def check_board(board_state: BoardState) -> bool:
@@ -74,8 +75,8 @@ class Solution(SolutionBase):
     def part2(self) -> int:
         calls, boards, board_states, num_to_pos = self.get_boards()
         final = False
-        final_board: list[list[int]] | None = None
-        final_board_state: list[list[bool]] | None = None
+        final_board: Board | None = None
+        final_board_state: BoardState | None = None
         for call in calls:
             for i, j, k in num_to_pos[call]:
                 board_states[i][j][k] = True
