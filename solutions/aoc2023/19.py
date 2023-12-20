@@ -157,12 +157,9 @@ class Solution(SolutionBase):
 
     def part2(self) -> int:
         nodes = self.build_dag()
-        total = 0
-        num_bounds = 0
-        for bound in all_bounds(nodes, nodes[STARTING_NODE], Bounds()):
-            total += bound.size()
-            num_bounds += 1
-        return total
+        return sum(
+            bound.size() for bound in all_bounds(nodes, nodes[STARTING_NODE], Bounds())
+        )
 
 
 if __name__ == "__main__":
