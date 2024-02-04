@@ -42,7 +42,7 @@ def adjacent_part1(grid: Grid[int], state: State) -> tuple[State, ...]:
             lambda new_state: in_bounds(new_state.coord, grid) and new_state.count <= 3,
             (
                 state.move(direction)
-                for direction in (state.direction,) + state.direction.adjacent
+                for direction in (state.direction, *state.direction.adjacent)
             ),
         )
     )
@@ -54,7 +54,7 @@ def adjacent_part2(grid: Grid[int], state: State) -> tuple[State, ...]:
     elif state.count < 4:
         valid_directions = (state.direction,)
     elif state.count < 10:
-        valid_directions = (state.direction,) + state.direction.adjacent
+        valid_directions = (state.direction, *state.direction.adjacent)
     else:
         valid_directions = state.direction.adjacent
     return tuple(

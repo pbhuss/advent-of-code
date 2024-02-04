@@ -57,7 +57,7 @@ class Solution(SolutionBase):
         g, start = self.build_graph()
         dest, _ = g[start]
         g.remove_edge(start, dest)
-        path = nx.shortest_path(g, start, dest) + [start]
+        path = [*nx.shortest_path(g, start, dest), start]
         new_path = set()
         for (x1, y1), (x2, y2) in pairwise(path):
             new_path.add(expand(x1, y1))
