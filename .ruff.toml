@@ -4,6 +4,7 @@ target-version = "py312"
 # https://docs.astral.sh/ruff/rules/
 extend-select = [
     "N8",       # pep8-naming
+    "PT",       # flake8-pytest-style
     "UP",       # pyupgrade
 ]
 extend-ignore = [
