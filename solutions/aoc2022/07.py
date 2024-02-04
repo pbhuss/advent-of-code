@@ -26,7 +26,7 @@ class Directory:
 class Solution(SolutionBase):
     def get_tree(self) -> Directory:
         root = Directory(None)
-        cur_dir: Directory
+        cur_dir = root
         lines = deque(self.input())
         while len(lines) > 0:
             _, cmd, *args = lines.popleft().split(" ")
