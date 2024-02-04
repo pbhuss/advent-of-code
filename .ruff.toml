@@ -6,6 +6,7 @@ extend-select = [
     "N8",       # pep8-naming
     "PT",       # flake8-pytest-style
     "RUF",      # ruff-specific rules
+    "SIM",      # flake8-simplify
     "UP",       # pyupgrade
 ]
 extend-ignore = [

@@ -10,7 +10,6 @@ class Solution(SolutionBase):
         input_ = self.input()
         order = next(input_)
         next(input_)
-        result = 0
         pattern = re.compile(r"([A-Z]{3}) = \(([A-Z]{3}), ([A-Z]{3})\)")
         graph = {}
         for line in input_:
@@ -20,12 +19,8 @@ class Solution(SolutionBase):
             graph[a] = (b, c)
 
         cur = "AAA"
-        for step in cycle(order):
-            if step == "L":
-                cur = graph[cur][0]
-            else:
-                cur = graph[cur][1]
-            result += 1
+        for result, step in enumerate(cycle(order), start=1):
+            cur = graph[cur][0] if step == "L" else graph[cur][1]
             if cur == "ZZZ":
                 return result
         raise Exception("not reachable")
@@ -45,13 +40,8 @@ class Solution(SolutionBase):
         curs = tuple(x for x in graph if x[-1] == "A")
         scores = []
         for cur in curs:
-            result = 0
-            for step in cycle(order):
-                if step == "L":
-                    cur = graph[cur][0]
-                else:
-                    cur = graph[cur][1]
-                result += 1
+            for result, step in enumerate(cycle(order), start=1):
+                cur = graph[cur][0] if step == "L" else graph[cur][1]
                 if cur[-1] == "Z":
                     scores.append(result)
                     break
