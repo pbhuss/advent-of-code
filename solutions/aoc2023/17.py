@@ -22,10 +22,7 @@ class State:
 
     def move(self, direction: Direction) -> State:
         new_x, new_y = move((self.x, self.y), direction)
-        if direction == self.direction:
-            new_count = self.count + 1
-        else:
-            new_count = 1
+        new_count = self.count + 1 if direction == self.direction else 1
         return State(new_x, new_y, direction, new_count)
 
     @property
