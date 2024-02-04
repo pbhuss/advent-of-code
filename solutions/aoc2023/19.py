@@ -116,7 +116,7 @@ class Solution(SolutionBase):
             name, _, workflow = instruction.partition("{")
             workflow = workflow[:-1]
             *states, final_state = workflow.split(",")
-            cur_node: Node
+            cur_node = None
             for i, state in enumerate(states):
                 check, _, result = state.partition(":")
                 if ">" in check:
@@ -124,12 +124,14 @@ class Solution(SolutionBase):
                 else:
                     cat, symbol, count = check.partition("<")
                 if i > 0:
+                    assert isinstance(cur_node, Node)
                     name = f"{name}[{i}]"
                     cur_node.failure = name
                 cur_node = Node(
                     name, Category(cat), Operator(symbol), int(count), result
                 )
                 nodes[name] = cur_node
+            assert isinstance(cur_node, Node)
             cur_node.failure = final_state
         return nodes
 

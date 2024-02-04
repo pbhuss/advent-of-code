@@ -1,0 +1,16 @@
+target-version = "py312"
+
+[lint]
+# https://docs.astral.sh/ruff/rules/
+extend-select = [
+    "N8",       # pep8-naming
+    "UP",       # pyupgrade
+]
+extend-ignore = [
+    "UP038",    # non-pep604-isinstance
+]
+
+[lint.pep8-naming]
+extend-ignore-names = [
+    "X",        # allow variables named X
+]
