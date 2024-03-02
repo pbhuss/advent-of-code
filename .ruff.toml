@@ -3,6 +3,7 @@ target-version = "py312"
 [lint]
 # https://docs.astral.sh/ruff/rules/
 extend-select = [
+    "I",        # isort
     "N8",       # pep8-naming
     "PT",       # flake8-pytest-style
     "RUF",      # ruff-specific rules
@@ -12,6 +13,10 @@ extend-select = [
 extend-ignore = [
     "UP038",    # non-pep604-isinstance
 ]
+
+[lint.isort]
+force-single-line = true
+order-by-type = false
 
 [lint.pep8-naming]
 extend-ignore-names = [

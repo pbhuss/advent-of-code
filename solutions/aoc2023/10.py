@@ -4,7 +4,6 @@ import networkx as nx
 
 from libaoc import SolutionBase
 
-
 EDGES = {
     "|": ((0, -1), (0, 1)),
     "-": ((-1, 0), (1, 0)),

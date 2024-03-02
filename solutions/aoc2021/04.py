@@ -4,7 +4,6 @@ from itertools import batched
 from libaoc import SolutionBase
 from libaoc.grid import Grid
 
-
 Board = Grid[int]
 BoardState = Grid[bool]
 

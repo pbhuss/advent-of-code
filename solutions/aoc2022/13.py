@@ -6,7 +6,6 @@ from itertools import zip_longest
 
 from libaoc import SolutionBase
 
-
 Item = int | list["Item"]
 
 
