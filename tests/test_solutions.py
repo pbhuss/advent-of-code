@@ -3,7 +3,6 @@ from types import ModuleType
 import pytest
 import yaml
 
-
 ANSWERS_PATH = "answers.yaml"
 
 

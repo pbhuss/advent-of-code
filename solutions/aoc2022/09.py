@@ -1,6 +1,5 @@
 from libaoc import SolutionBase
 
-
 Coord = tuple[int, int]
 
 

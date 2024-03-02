@@ -2,7 +2,6 @@ import re
 
 from libaoc import SolutionBase
 
-
 DIGITS = {
     "one": "1",
     "two": "2",

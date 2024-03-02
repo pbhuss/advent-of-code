@@ -4,7 +4,6 @@ from collections.abc import Iterator
 
 from libaoc import SolutionBase
 
-
 Grid = list[list[str]]
 Coord = tuple[int, int]
 

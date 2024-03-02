@@ -9,7 +9,6 @@ from typing import NamedTuple
 
 from libaoc import SolutionBase
 
-
 logging.basicConfig(level=logging.ERROR, format="%(message)s")
 logger = logging.getLogger(__name__)
 

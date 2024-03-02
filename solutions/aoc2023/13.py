@@ -1,6 +1,5 @@
 from libaoc import SolutionBase
 
-
 Pattern = list[str]
 
 flip = {"#": ".", ".": "#"}
