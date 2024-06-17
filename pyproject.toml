@@ -11,7 +11,7 @@ mypy = "^1.7.1"
 pytest = "^7.4.3"
 PyYAML = "^6.0.1"
 types-PyYAML = "^6.0.12.12"
-urllib3 = "^2.1.0"
+urllib3 = "^2.2.2"
 networkx = "^3.2.1"
 
 
