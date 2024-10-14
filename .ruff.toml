@@ -1,4 +1,4 @@
-target-version = "py312"
+target-version = "py313"
 
 [lint]
 # https://docs.astral.sh/ruff/rules/
@@ -17,8 +17,3 @@ extend-ignore = [
 [lint.isort]
 force-single-line = true
 order-by-type = false
-
-[lint.pep8-naming]
-extend-ignore-names = [
-    "X",        # allow variables named X
-]
