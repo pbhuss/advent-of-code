@@ -1,25 +1,3 @@
-[tool.poetry]
-name = "advent-of-code"
-version = "0.1.0"
-description = "Solutions for Advent of Code (adventofcode.com)"
-authors = ["Peter Huss <5091033+pbhuss@users.noreply.github.com>"]
-readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "~3.12"
-mypy = "^1.7.1"
-pytest = "^7.4.3"
-PyYAML = "^6.0.1"
-types-PyYAML = "^6.0.12.12"
-urllib3 = "^2.1.0"
-networkx = "^3.2.1"
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-
 [tool.mypy]
 check_untyped_defs = true
 disallow_any_generics = true
