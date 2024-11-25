@@ -49,7 +49,7 @@ class SolutionBase(abc.ABC):
         day = int(script_path.stem)
         self.data_file = get_data_file(year, day, example)
 
-    def input(self, strip: bool = True) -> Generator[str, None, None]:
+    def input(self, strip: bool = True) -> Generator[str]:
         with self.data_file.open() as fp:
             for line in fp:
                 if strip:
