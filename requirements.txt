@@ -4,17 +4,17 @@ colorama==0.4.6 ; sys_platform == 'win32'
     # via pytest
 iniconfig==2.0.0
     # via pytest
-mypy==1.11.2
+mypy==1.13.0
     # via -r requirements.in
 mypy-extensions==1.0.0
     # via mypy
-networkx==3.4.1
+networkx==3.4.2
     # via -r requirements.in
-packaging==24.1
+packaging==24.2
     # via pytest
 pluggy==1.5.0
     # via pytest
-pytest==8.3.3
+pytest==8.3.4
     # via -r requirements.in
 pyyaml==6.0.2
     # via -r requirements.in
