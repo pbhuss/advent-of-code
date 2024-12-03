@@ -6,8 +6,9 @@ from functools import total_ordering
 from typing import TypeVar
 
 T = TypeVar("T")
-Coord = tuple[int, int]
-Grid = list[list[T]]
+
+type Coord = tuple[int, int]
+type Grid[T] = list[list[T]]
 
 
 @total_ordering
