@@ -13,4 +13,4 @@ from libaoc.grid import Direction
     ],
 )
 def test_direction_adjacent(direction: Direction, expected: tuple[Direction]) -> None:
-    assert sorted(direction.adjacent) == sorted(expected)
+    assert sorted(direction.orthogonal) == sorted(expected)

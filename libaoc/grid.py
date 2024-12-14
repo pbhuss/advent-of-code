@@ -17,32 +17,43 @@ class Direction(enum.Enum):
     SOUTH = (0, 1)
     EAST = (1, 0)
     WEST = (-1, 0)
+    NORTHWEST = (-1, -1)
+    NORTHEAST = (1, -1)
+    SOUTHWEST = (-1, 1)
+    SOUTHEAST = (1, 1)
 
     @property
     def opposite(self) -> Direction:
-        match self:
-            case Direction.NORTH:
-                return Direction.SOUTH
-            case Direction.SOUTH:
-                return Direction.NORTH
-            case Direction.EAST:
-                return Direction.WEST
-            case Direction.WEST:
-                return Direction.EAST
+        x, y = self.value
+        return Direction((-x, -y))
 
     @property
-    def adjacent(self) -> tuple[Direction, Direction]:
-        a1, a2 = set(Direction) - {self, self.opposite}
-        return a1, a2
+    def orthogonal(self) -> tuple[Direction, Direction]:
+        x, y = self.value
+        if x == 0:
+            return Direction((1, 0)), Direction((-1, 0))
+        elif y == 0:
+            return Direction((0, 1)), Direction((0, -1))
+        else:
+            return Direction((x, -y)), Direction((-x, y))
 
     def __lt__(self, other: Direction) -> bool:
         return self.value < other.value
 
+    @classmethod
+    def cardinal(cls) -> set[Direction]:
+        return {cls.NORTH, cls.SOUTH, cls.EAST, cls.WEST}
 
-def move(coord: Coord, direction: Direction) -> Coord:
+
+def move(coord: Coord, direction: Direction, n: int = 1) -> Coord:
     x, y = coord
     x_move, y_move = direction.value
-    return x + x_move, y + y_move
+    return x + x_move * n, y + y_move * n
+
+
+def move_get(grid: Grid[T], coord: Coord, direction: Direction, n: int = 1) -> T:
+    x, y = move(coord, direction, n)
+    return grid[y][x]
 
 
 def in_bounds(coord: Coord, grid: Grid[T]) -> bool:
@@ -62,3 +73,17 @@ def surrounding(
         for yi in range(max(0, y - 1), min(height, y + 2)):
             if include_self or (xi, yi) != coord:
                 yield xi, yi
+
+
+def line(grid: Grid[T], start: Coord, direction: Direction, length: int) -> list[T]:
+    if not in_bounds(start, grid):
+        raise ValueError("Start of line is not in bounds")
+    end = move(start, direction, length - 1)
+    if not in_bounds(end, grid):
+        raise ValueError("End of line is not in bounds")
+    result = []
+    cur = x, y = start
+    for i in range(length):
+        result.append(grid[y][x])
+        cur = x, y = move(cur, direction)
+    return result
