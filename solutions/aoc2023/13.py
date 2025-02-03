@@ -33,7 +33,7 @@ def find_flip(pattern: Pattern) -> int:
     for i in range(len(pattern)):
         for j in range(len(pattern[0])):
             old_str = pattern[i]
-            pattern[i] = f"{old_str[:j]}{flip[old_str[j]]}{old_str[j + 1:]}"
+            pattern[i] = f"{old_str[:j]}{flip[old_str[j]]}{old_str[j + 1 :]}"
             new_scores = scores(pattern)
             diff = new_scores - old_scores
             if diff:
