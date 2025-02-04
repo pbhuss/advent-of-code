@@ -26,7 +26,7 @@ class Solution(SolutionBase):
 
     def part2(self) -> int:
         pattern = re.compile(
-            rf'(?=(\d|{"|".join(DIGITS)}))'
+            rf"(?=(\d|{'|'.join(DIGITS)}))"
         )  # positive lookahead for match overlaps
         total = 0
         for line in self.input():
