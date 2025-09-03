@@ -2,23 +2,27 @@
 #    uv pip compile -p 3.13 --universal -o requirements.txt requirements.in
 colorama==0.4.6 ; sys_platform == 'win32'
     # via pytest
-iniconfig==2.0.0
+iniconfig==2.1.0
     # via pytest
-mypy==1.13.0
+mypy==1.17.1
     # via -r requirements.in
-mypy-extensions==1.0.0
+mypy-extensions==1.1.0
     # via mypy
-networkx==3.4.2
+networkx==3.5
     # via -r requirements.in
-packaging==24.2
+packaging==25.0
     # via pytest
-pluggy==1.5.0
+pathspec==0.12.1
+    # via mypy
+pluggy==1.6.0
     # via pytest
-pytest==8.3.4
+pygments==2.19.2
+    # via pytest
+pytest==8.4.1
     # via -r requirements.in
 pyyaml==6.0.2
     # via -r requirements.in
-typing-extensions==4.12.2
+typing-extensions==4.15.0
     # via mypy
-urllib3==2.2.3
+urllib3==2.5.0
     # via -r requirements.in
