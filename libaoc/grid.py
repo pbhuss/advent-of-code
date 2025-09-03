@@ -51,19 +51,19 @@ def move(coord: Coord, direction: Direction, n: int = 1) -> Coord:
     return x + x_move * n, y + y_move * n
 
 
-def move_get(grid: Grid[T], coord: Coord, direction: Direction, n: int = 1) -> T:
+def move_get[T](grid: Grid[T], coord: Coord, direction: Direction, n: int = 1) -> T:
     x, y = move(coord, direction, n)
     return grid[y][x]
 
 
-def in_bounds(coord: Coord, grid: Grid[T]) -> bool:
+def in_bounds[T](coord: Coord, grid: Grid[T]) -> bool:
     height = len(grid)
     width = len(grid[0])
     x, y = coord
     return 0 <= x < width and 0 <= y < height
 
 
-def surrounding(
+def surrounding[T](
     coord: Coord, grid: Grid[T], include_self: bool = False
 ) -> Iterator[Coord]:
     height = len(grid)
@@ -75,7 +75,7 @@ def surrounding(
                 yield xi, yi
 
 
-def line(grid: Grid[T], start: Coord, direction: Direction, length: int) -> list[T]:
+def line[T](grid: Grid[T], start: Coord, direction: Direction, length: int) -> list[T]:
     if not in_bounds(start, grid):
         raise ValueError("Start of line is not in bounds")
     end = move(start, direction, length - 1)
