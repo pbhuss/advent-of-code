@@ -63,9 +63,8 @@ class Solution(SolutionBase):
         open_set.put((f_score[starting_state], starting_state))
 
         while not open_set.empty():
-            cur_score: int
             cur_state: State
-            cur_score, cur_state = open_set.get()
+            _, cur_state = open_set.get()
 
             if not cur_state.valves_closed or cur_state.time_remaining == 0:
                 pressure_released = 0
@@ -143,9 +142,8 @@ class Solution(SolutionBase):
         open_set.put((f_score[starting_state], starting_state))
 
         while not open_set.empty():
-            cur_score: int
             cur_state: TwoState
-            cur_score, cur_state = open_set.get()
+            _, cur_state = open_set.get()
 
             if not cur_state.valves_closed or cur_state.time_remaining == 0:
                 pressure_released = 0
