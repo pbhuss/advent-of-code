@@ -20,4 +20,4 @@ repos:
         additional_dependencies:
             - types-PyYAML
 default_language_version:
-    python: python3.13
+    python: python3.14
