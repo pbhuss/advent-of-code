@@ -10,9 +10,6 @@ extend-select = [
     "SIM",      # flake8-simplify
     "UP",       # pyupgrade
 ]
-extend-ignore = [
-    "UP038",    # non-pep604-isinstance
-]
 
 [lint.isort]
 force-single-line = true
