@@ -18,7 +18,7 @@ class Solution(SolutionBase):
         sums: dict[int, int] = defaultdict(int)
         for i, row in enumerate(self.input()):
             value = int(row)
-            for j in range(0, 3):
+            for j in range(3):
                 sums[i - j] += value
 
         cur = sums[0]
