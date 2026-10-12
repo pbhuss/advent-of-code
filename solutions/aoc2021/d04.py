@@ -69,7 +69,7 @@ class Solution(SolutionBase):
             for board, board_state in zip(boards, board_states):
                 if check_board(board_state):
                     return call * sum_unrevealed(board, board_state)
-        raise Exception("unreachable")
+        raise RuntimeError("unreachable")
 
     def part2(self) -> int:
         calls, boards, board_states, num_to_pos = self.get_boards()
@@ -92,7 +92,7 @@ class Solution(SolutionBase):
                 if len(unsolved) == 1:
                     final = True
                     ((final_board, final_board_state),) = unsolved
-        raise Exception("unreachable")
+        raise RuntimeError("unreachable")
 
 
 if __name__ == "__main__":

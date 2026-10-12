@@ -21,7 +21,7 @@ class Solution(SolutionBase):
             elif diagonal and abs(x1 - x2) == abs(y1 - y2):
                 x_step = 1 if x2 > x1 else -1
                 y_step = 1 if y2 > y1 else -1
-                for i in range(0, abs(x2 - x1) + 1):
+                for i in range(abs(x2 - x1) + 1):
                     counts[(x1 + x_step * i, y1 + y_step * i)] += 1
 
         return sum(1 for count in counts.values() if count > 1)

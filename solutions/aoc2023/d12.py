@@ -29,7 +29,7 @@ def consume(pattern: str, counts: tuple[int, ...], pos: int, ate: bool) -> int:
             total += consume(pattern, counts, pos + 1, False)
             return total
         case _:
-            raise Exception("unreachable")
+            raise RuntimeError("unreachable")
 
 
 class Solution(SolutionBase):

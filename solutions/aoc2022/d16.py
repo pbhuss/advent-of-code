@@ -115,7 +115,7 @@ class Solution(SolutionBase):
                         new_state, valve_to_rate
                     )
                     open_set.put((f_score[new_state], new_state))
-        raise Exception("unreachable")
+        raise RuntimeError("unreachable")
 
     def part2(self) -> int:
         valve_pattern = re.compile(r"[A-Z]{2}")
@@ -232,7 +232,7 @@ class Solution(SolutionBase):
                         new_state, valve_to_rate
                     )
                     open_set.put((f_score[new_state], new_state))
-        raise Exception("unreachable")
+        raise RuntimeError("unreachable")
 
 
 if __name__ == "__main__":

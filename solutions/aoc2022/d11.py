@@ -65,10 +65,10 @@ class Solution(SolutionBase):
 
         for _ in range(num_rounds):
             for i, monkey in enumerate(monkeys):
-                logging.info(f"Monkey {i}")
+                logger.info(f"Monkey {i}")
                 inspect_counts[i] += len(monkey.items)
                 for item in monkey.items:
-                    logging.info(
+                    logger.info(
                         f"  Monkey inspects an item with a worry value of {item}."
                     )
                     item = monkey.operation(item)
@@ -76,27 +76,27 @@ class Solution(SolutionBase):
                         item //= 3
                     else:
                         item %= modulo
-                    logging.info(f"    Worry level is modified to {item}.")
+                    logger.info(f"    Worry level is modified to {item}.")
                     if item % monkey.divisor == 0:
-                        logging.info(
+                        logger.info(
                             f"    Current worry is divisible by {monkey.divisor}."
                         )
-                        logging.info(
+                        logger.info(
                             f"    Item with worry level {item} is thrown to monkey {monkey.true_idx}."
                         )
                         monkeys[monkey.true_idx].items.append(item)
                     else:
-                        logging.info(
+                        logger.info(
                             f"    Current worry is not divisible by {monkey.divisor}."
                         )
-                        logging.info(
+                        logger.info(
                             f"    Item with worry level {item} is thrown to monkey {monkey.false_idx}."
                         )
                         monkeys[monkey.false_idx].items.append(item)
                 monkey.items.clear()
 
         for i, inspect_count in enumerate(inspect_counts):
-            logging.info(f"Monkey {i} inspected items {inspect_count} times.")
+            logger.info(f"Monkey {i} inspected items {inspect_count} times.")
 
         inspect_counts.sort()
         return inspect_counts[-1] * inspect_counts[-2]

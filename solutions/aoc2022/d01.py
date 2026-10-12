@@ -26,7 +26,7 @@ class Solution(SolutionBase):
                 cur_group += int(line)
         groups.append(cur_group)
 
-        return sum(list(sorted(groups))[-3:])
+        return sum(sorted(groups)[-3:])
 
 
 if __name__ == "__main__":

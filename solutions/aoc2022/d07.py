@@ -74,7 +74,7 @@ class Solution(SolutionBase):
             if size + free >= required:
                 return size
 
-        raise Exception("unreachable")
+        raise RuntimeError("unreachable")
 
 
 if __name__ == "__main__":

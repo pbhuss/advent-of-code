@@ -10,7 +10,7 @@ import solutions
 
 def load_solution_modules() -> dict[str, ModuleType]:
     module_map = {}
-    pattern = re.compile(r"(\d{4})\.(\d{2})")
+    pattern = re.compile(r"(\d{4})\.d(\d{2})")
     for _, modname, is_pkg in pkgutil.walk_packages(
         solutions.__path__, f"{solutions.__name__}."
     ):
@@ -18,7 +18,7 @@ def load_solution_modules() -> dict[str, ModuleType]:
             continue
         match = pattern.search(modname)
         if match is None:
-            raise Exception(f"invalid module {modname}")
+            raise ImportError(f"invalid module {modname}")
         problem = f"{match.group(1)}-{match.group(2)}"
         module_map[problem] = import_module(modname)
     return module_map

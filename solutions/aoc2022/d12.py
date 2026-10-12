@@ -41,7 +41,7 @@ class Solution(SolutionBase):
                         val = "z"
                 grid[(x, y)] = ord(val) - ord("a")
 
-        n_col, n_row = map(lambda x: x + 1, max(grid))
+        n_col, n_row = (x + 1 for x in max(grid))
 
         dists: dict[tuple[int, int], int | float] = {}
         visited = set()
@@ -70,7 +70,7 @@ class Solution(SolutionBase):
                     dists[neighbor] = alt_dist
                     queue.put((alt_dist, neighbor))
 
-        raise Exception("unreachable")
+        raise RuntimeError("unreachable")
 
     def part2(self) -> int:
         grid = {}
@@ -89,7 +89,7 @@ class Solution(SolutionBase):
                         ends.append((x, y))
                 grid[(x, y)] = ord(val) - ord("a")
 
-        n_col, n_row = map(lambda x: x + 1, max(grid))
+        n_col, n_row = (x + 1 for x in max(grid))
 
         dists: dict[tuple[int, int], int | float] = {}
         visited = set()

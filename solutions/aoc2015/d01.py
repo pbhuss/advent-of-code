@@ -17,7 +17,7 @@ class Solution(SolutionBase):
                     cur_floor -= 1
             if cur_floor == -1:
                 return i
-        raise Exception("not reachable")
+        raise RuntimeError("not reachable")
 
 
 if __name__ == "__main__":

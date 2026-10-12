@@ -23,7 +23,7 @@ class Solution(SolutionBase):
             cur = graph[cur][0] if step == "L" else graph[cur][1]
             if cur == "ZZZ":
                 return result
-        raise Exception("not reachable")
+        raise RuntimeError("not reachable")
 
     def part2(self) -> int:
         input_ = self.input()
