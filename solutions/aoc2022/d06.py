@@ -11,7 +11,7 @@ class Solution(SolutionBase):
             window.append(char)
             if len(window) == size and len(set(window)) == size:
                 return i
-        raise Exception("unreachable")
+        raise RuntimeError("unreachable")
 
     def part1(self) -> int:
         return self.result(4)

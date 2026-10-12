@@ -11,6 +11,10 @@ def get_session_cookie() -> str:
         return fp.read().strip()
 
 
+class HTTPError(Exception):
+    pass
+
+
 def get_data_file(year: int, day: int, example: bool = False) -> pathlib.Path:
     data_dir = pathlib.Path("example_data" if example else "data") / str(year)
     data_dir.mkdir(parents=True, exist_ok=True)
@@ -33,7 +37,7 @@ def get_data_file(year: int, day: int, example: bool = False) -> pathlib.Path:
                 },
             )
             if 400 <= resp.status < 600:
-                raise Exception(f"{url} returned {resp.status}: {resp.reason}")
+                raise HTTPError(f"{url} returned {resp.status}: {resp.reason}")
             with data_file.open("wb") as fp:
                 fp.write(resp.data)
     return data_file
@@ -46,7 +50,7 @@ class SolutionBase(abc.ABC):
         script_path = pathlib.Path(script_file)
         *_, year_pt, _ = script_path.parts
         year = int(year_pt.lstrip("aoc"))
-        day = int(script_path.stem)
+        day = int(script_path.stem[1:])
         self.data_file = get_data_file(year, day, example)
 
     def input(self, strip: bool = True) -> Generator[str]:

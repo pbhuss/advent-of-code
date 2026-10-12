@@ -5,7 +5,7 @@ from libaoc import SolutionBase
 
 
 def same_polarity(n: Iterable[int]) -> bool:
-    return len(set(x > 0 for x in n)) == 1
+    return len({x > 0 for x in n}) == 1
 
 
 def all_between(n: Iterable[int], a: int, b: int) -> bool:

@@ -58,7 +58,7 @@ class Solution(SolutionBase):
                 if not covered:
                     return xi * max_pos + yi
                 yi += 1
-        raise Exception("unreachable")
+        raise RuntimeError("unreachable")
 
 
 if __name__ == "__main__":

@@ -23,7 +23,7 @@ def find_reflections(pattern: Pattern) -> list[int]:
 
 
 def scores(pattern: Pattern) -> set[int]:
-    result = set(map(lambda x: 100 * x, find_reflections(pattern)))
+    result = {100 * x for x in find_reflections(pattern)}
     result.update(find_reflections(rotate_pattern(pattern)))
     return result
 
@@ -40,7 +40,7 @@ def find_flip(pattern: Pattern) -> int:
                 (new_score,) = diff
                 return new_score
             pattern[i] = old_str
-    raise Exception("unreachable")
+    raise RuntimeError("unreachable")
 
 
 class Solution(SolutionBase):
