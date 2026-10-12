@@ -1,3 +1,17 @@
+[project]
+name = "advent-of-code"
+version = "0.1.0"
+description = "Solutions for Advent of Code (https://adventofcode.com)"
+readme = "README.md"
+requires-python = ">=3.15"
+dependencies = [
+    "mypy",
+    "networkx",
+    "pytest",
+    "PyYAML",
+    "urllib3",
+]
+
 [tool.mypy]
 check_untyped_defs = true
 disallow_any_generics = true
